@@ -1,0 +1,68 @@
+header {
+    padding-left: 20px;
+}
+
+span.glyphicon-trash, span.glyphicon-unchecked{
+    cursor: pointer;
+}
+
+li > span{
+    text-align: center;
+}
+
+li > span:first-child {
+    text-align: left;
+    width: 20px;
+    padding-left: 5px;
+}
+
+li > span:last-child {
+    text-align: right;
+}
+
+li >span:nth-child(2){
+    text-align: left;
+    width: 47%;
+}
+
+.main-container{
+    width: 960px;
+    margin: 0 auto
+}
+
+.calendar-input{
+    background-color: white;
+}
+
+.button{
+    width: 70px;
+}
+
+.structural{
+    padding: 10px;
+}
+
+.row-custom{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.no-tasks{
+    font-size: 24px;
+    color: lightgrey;
+    text-align: center;
+}
+
+.options-panel{
+    display: inline-block;
+    float: left;
+    width: 18%;
+    box-sizing: border-box;
+}
+
+.main-panel{
+    display: inline-block;
+    float: left;
+    width: 82%;
+    box-sizing: border-box;
+}

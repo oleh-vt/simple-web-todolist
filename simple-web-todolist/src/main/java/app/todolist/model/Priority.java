@@ -12,7 +12,7 @@ public enum Priority {
 	}
 	
 	@JsonCreator
-	public Priority toEnum(String name){
+	public static Priority toEnum(String name){
 		return Priority.valueOf(name);
 	}
 }

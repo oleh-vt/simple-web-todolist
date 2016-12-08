@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,27 +38,28 @@ public class TaskController {
 		return TaskDTO.mapFromEntityList(tasks);
 	}
 	
-/*	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(method = RequestMethod.POST)
-	public TaskDTO addTask(@Valid @RequestBody TaskDTO t){
-		return TaskDTO.mapFromEntity(ts.saveTask(t));
-	}*/
-	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(method = RequestMethod.POST)
 	public TaskDTO addTask(	@RequestParam(value = "name", required = true) String name,
-							@RequestParam(value = "dueDate", required = true) Date dueDate,
+							@RequestParam(value = "dueDate", required = true) 
+											@DateTimeFormat(pattern = "dd-MM-yyyy")Date dueDate,
 							@RequestParam(value = "priority", required = true) String priority){
-		return ts.saveTask(name, dueDate, priority);
+		
+		return TaskDTO.mapFromEntity(ts.saveTask(name.trim(), dueDate, priority.trim()));
 	}
 	
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<String> markAccomplished(@RequestParam (value="id", required=true) Long id){
+		boolean success = ts.markTaskAsAccomplished(id);
+		return (success) ?  new ResponseEntity<>(HttpStatus.NO_CONTENT) : 
+							new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public void removeTask(@RequestParam Long id){
-		ts.deleteTask(id);
+	public ResponseEntity<String> removeTask(@RequestParam Long id){
+		boolean success = ts.deleteTask(id);
+		return (success) ?  new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>( HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -78,6 +80,6 @@ public class TaskController {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> exceptionHandler(Exception ex){
 		ex.printStackTrace();
-		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

@@ -17,7 +17,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="tasks")
 @NamedQueries({
-	@NamedQuery(name = "find_all", query = "from Task")
+	@NamedQuery(name = "find_all", query = "from Task"),
+	@NamedQuery(name = "mark_accomplished", query = "update Task set accomplished = true where id = :id")
 })
 public class Task {
 	

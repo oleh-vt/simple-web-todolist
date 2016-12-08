@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SimpleTodoList">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Todo List</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/mystyle.css">
+    <script src="resources/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="resources/js/lib/jquery-datepicker.min.js"></script>
+    <script src="resources/js/lib/angular.min.js"></script>
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/MainController.js"></script>
+    <script src="resources/js/SimpleTodoList.js"></script>
+</head>
+<body>
+    <header class="page-header"><h1 style="font-family: 'Chaparral Pro Light'; font-style: italic;">Simple ToDo List</h1></header>
+    <main ng-controller="MainController">
+        <div class="container-fluid main-container">
+            <aside class="options-panel structural">
+                <div class="panel panel-default">
+                    <div class="panel-heading ">Tasks</div>
+                    <div class="panel-body radio">
+                        <label ><input type="radio" value='false' ng-model="isAccomplished" > planned</label>
+                        <label ><input type="radio" value='true' ng-model="isAccomplished"> accomplished</label>
+                    </div>
+                </div>
+            </aside>
+            <section class="main-panel  structural">
+                <div>
+                    <div class="panel panel-default panel-body" style="text-align: center">
+                        <form name="add_task" class="form-inline" ng-submit="add(what, due_date, priority)">
+                            <label for="what" class="small">What to do</label>
+                            <input type="text" id="what" required size="30" maxlength="40" placeholder="40 characters"
+                                   class="form-control input-sm" ng-model="what">
+                            <div class="form-group has-feedback">
+                                <label for="when" class="small">When</label>
+                                <input type="text" id="when" required size="10" maxlength="10" readonly
+                                       class="form-control input-sm" style="background-color: transparent"
+                                       ng-model="due_date" jqdatepicker>
+                                    <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
+                            </div>
+                            <label for="urgency" class="small">Urgency</label>
+                            <select id="urgency" class="form-control input-sm" ng-model="priority" >
+                                <option>LOW</option>
+                                <option selected>MEDIUM</option>
+                                <option>HIGH</option>
+                            </select>
+                            <input type="submit" value="Add" class="btn btn-default btn-sm button"
+                                   style="background-color: lightgrey;">
+                        </form>
+                    </div>
+                    <div style="text-align: center;">
+                        <span ng-if="tasks.length == 0" class="no-tasks">No tasks</span>
+                    </div>
+                    <div>
+                        <ul class="list-group" ng-cloak>
+                            <li class="list-group-item row row-custom" ng-repeat="t in tasks" id="{{t.id}}">
+                                <span class="col-md-1" ng-switch="isAccomplished">
+                                    <span  class="glyphicon glyphicon-unchecked" ng-switch-when="false"
+                                                                                 ng-click="markDone($event)"></span>
+                                    <span ng-switch-when="true" class="glyphicon glyphicon-ok" ></span>
+                                </span>
+                                <span class="col-md-5">{{t.name}}</span>
+                                <span class="col-md-1" ng-switch="isAccomplished">
+                                    <i class="label label-warning" ng-switch-when="false" ng-if="t.overdue"
+                                       style="font-weight: lighter">overdue</i>
+                                </span>
+                                <span class="col-md-2">{{t.dueDate}}</span>
+                                <span class="col-md-2">{{t.priority}}</span>
+                                <span class="col-md-1">
+                                    <span class="glyphicon glyphicon-trash" ng-click="delete($event)"></span>
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

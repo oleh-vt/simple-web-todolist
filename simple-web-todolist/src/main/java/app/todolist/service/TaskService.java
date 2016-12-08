@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.todolist.model.Priority;
 import app.todolist.model.Task;
 import app.todolist.repository.ITaskRepository;
 
@@ -24,23 +25,17 @@ public class TaskService {
 	
 	@Transactional
 	public Task saveTask(String name, Date dueDate, String priority){
-		Task t = null;
-		if(task.getId() != null){
-			t = tr.findById(task.getId());
-			t.setName(task.getName());
-			t.setDueDate(task.getDueDate());
-			t.setPriority(task.getPriority());
-			t.setAccomplished(task.isCompleted());
-		}
-		else{
-			t = tr.upsert(new Task(task.getName(), task.getDueDate(), task.getPriority()));
-		}
-		return t;
+		return tr.add(new Task(name, dueDate, Priority.toEnum(priority)));
 	}
 	
 	@Transactional
-	public void deleteTask(Long id){
-		tr.remove(id);
+	public boolean markTaskAsAccomplished(Long id){
+		return tr.markAccomplished(id);
+	}
+	
+	@Transactional
+	public boolean deleteTask(Long id){
+		return tr.remove(id);
 	}
 	
 }

@@ -4,4 +4,7 @@
     	 version="2.5">
     	 
   <display-name>Simple Todo List</display-name>
+  <welcome-file-list>
+  	<welcome-file>/resources/index.html</welcome-file>
+  </welcome-file-list>
 </web-app>
