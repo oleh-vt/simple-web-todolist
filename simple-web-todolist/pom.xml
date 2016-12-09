@@ -32,6 +32,14 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+		<version>1.9.5</version>
+		<scope>test</scope>
+	</dependency>
+    
     <dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>servlet-api</artifactId>
@@ -66,6 +74,12 @@
 	    <version>${spring-framework-version}</version>
 	</dependency>
 	
+	<dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring-framework-version}</version>
+    </dependency>
+	
   	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-core</artifactId>
@@ -91,7 +105,7 @@
 	<dependency>
 	    <groupId>org.projectlombok</groupId>
 	    <artifactId>lombok</artifactId>
-	    <version>1.16.10</version>
+	    <version>${lombok-version}</version>
 	</dependency>
 	
 	<dependency>
@@ -104,6 +118,25 @@
   
   <build>
     <finalName>simple-web-todolist</finalName>
+        <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
+		</plugin>
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <configuration>
+                <path>/</path>
+<!--                 <httpsPort>8082</httpsPort> -->
+            </configuration>
+        </plugin>
+    </plugins>
   </build>
   
 </project>

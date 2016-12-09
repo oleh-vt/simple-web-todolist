@@ -1,8 +1,8 @@
 (function () {
    
     var simpleTodoListService = function ($http) {
-
-        var serverUrl = '/simple-web-todolist/tasks'; 
+    	//var serverUrl = '/simple-web-todolist/tasks';
+        var serverUrl = '/tasks'; 
         
         var findTasks = function () {
             return $http.get(serverUrl).then(function (response) {

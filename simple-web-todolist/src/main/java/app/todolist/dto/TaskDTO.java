@@ -41,7 +41,6 @@ public class TaskDTO {
 		return new TaskDTO(t.getId(), t.getName(), t.getDueDate(), t.getPriority(), t.isAccomplished());
 	}
 	
-	//consider refactoring with Java 8
 	public static List<TaskDTO> mapFromEntityList(List<Task> l){
 		List<TaskDTO> dtos = new LinkedList<>();
 		for(Task t: l){
