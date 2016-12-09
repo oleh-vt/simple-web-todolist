@@ -25,19 +25,12 @@
             }
         };
 
-        /*var getTasks = function () {
-            simpleTodoListService.findTasks().then(function (data) {
-                allTasks = data;
-            }, onError);
-        };*/
-
         var onError = function (data) {
             $scope.userError = data;
         };
 
         $scope.delete = function (obj) {
             var id = obj.target.parentNode.parentNode.id;
-            console.log(id);
             simpleTodoListService.deleteTask(id).then(function (data) {
                 for(var i = 0; i < allTasks.length; i++){
                     if(allTasks[i].id == id)
@@ -62,16 +55,10 @@
         $scope.$watch(function ($scope) {
             return $scope.isAccomplished;
         }, function (newValue, oldValue) {
-            console.log("Value changed from "+ oldValue + " to " + newValue);
             populateTasksToDisplay(newValue);
-            //$scope.getTasks(newValue);
         });
 
-
-
-        //$scope.add = function (task, date, priority) {
         $scope.add = function (task, date, priority) {
-            //console.log(task + " " + date + " " + priority);
             simpleTodoListService.saveTask(
                 'name='+ task +
                 '&dueDate='+date+
@@ -83,7 +70,6 @@
                 allTasks.push(data);
                 if(!JSON.parse($scope.isAccomplished))
                     $scope.tasks.push(data);
-                //$scope.newUser = data;
             }, onError);
         };
 

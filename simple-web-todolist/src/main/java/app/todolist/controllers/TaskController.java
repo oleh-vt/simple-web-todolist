@@ -43,7 +43,7 @@ public class TaskController {
 	@RequestMapping(method = RequestMethod.POST)
 	public TaskDTO addTask(	@RequestParam(value = "name", required = true) String name,
 							@RequestParam(value = "dueDate", required = true) 
-											@DateTimeFormat(pattern = "dd-MM-yyyy")Date dueDate,
+											@DateTimeFormat(pattern = TaskDTO.DATE_PATTERN)Date dueDate,
 							@RequestParam(value = "priority", required = true) String priority){
 		
 		return TaskDTO.mapFromEntity(ts.saveTask(name.trim(), dueDate, priority.trim()));

@@ -20,7 +20,6 @@ public class TaskRepository implements ITaskRepository {
 	@Override
 	public List<Task> findAll() {
 		TypedQuery<Task> query = em.createNamedQuery("find_all", Task.class);
-		//query.setParameter("accomplished", accomplished);
 		return query.getResultList();
 	}
 	

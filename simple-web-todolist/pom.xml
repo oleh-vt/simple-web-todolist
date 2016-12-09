@@ -15,17 +15,11 @@
   	<spring-framework-version>4.3.3.RELEASE</spring-framework-version>
   	<mysql-driver-version>6.0.3</mysql-driver-version>
   	<hibernate-version>5.2.2.Final</hibernate-version>
-  	<lombok-version>1.16.10</lombok-version>
+  	<lombok-version>1.16.12</lombok-version>
   	<jackson-version>2.8.4</jackson-version>
   </properties>
   
   <dependencies>
-<!-- 	<dependency>
-	    <groupId>org.springframework.data</groupId>
-	    <artifactId>spring-data-jpa</artifactId>
-	    <version>1.10.5.RELEASE</version>
-	</dependency> -->
-  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -133,7 +127,6 @@
             <artifactId>tomcat7-maven-plugin</artifactId>
             <configuration>
                 <path>/</path>
-<!--                 <httpsPort>8082</httpsPort> -->
             </configuration>
         </plugin>
     </plugins>

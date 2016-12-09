@@ -1,29 +1,17 @@
 package app.todolist.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class FieldErrorDTO {
 	
+	@Getter @Setter
 	private String field;
+	@Getter @Setter
 	private String message;
-
-	public FieldErrorDTO(String field, String message) {
-		this.field = field;
-		this.message = message;
-	}
-
-	public String getField() {
-		return field;
-	}
-
-	public void setField(String field) {
-		this.field = field;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 }

@@ -13,20 +13,35 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import app.todolist.model.Priority;
 import app.todolist.model.Task;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@NoArgsConstructor
 public class TaskDTO {
 	
+	public static final String DATE_PATTERN="dd-MM-yyyy";
+	
+	@Getter @Setter
 	private Long id;
+	
 	@NotNull @Size(min=4, max=30)
+	@Getter @Setter
 	private String name;
-	@JsonFormat(pattern="dd-MM-yyyy", timezone="EET")
+	
+	@JsonFormat(pattern=DATE_PATTERN, timezone="EET")
 	@JsonSerialize(using=CustomDateSerializer.class)
+	@Getter @Setter
 	private Date dueDate;
+	
+	@Getter @Setter
 	private Priority priority;
+	
+	@Getter @Setter
 	private boolean completed;
+	
+	@Getter
 	private boolean overdue;
 	
-	public TaskDTO() {}
 	
 	public TaskDTO(Long id, String name, Date dueDate, Priority priority, boolean completed) {
 		this.id = id;
@@ -49,43 +64,8 @@ public class TaskDTO {
 		return dtos;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getDueDate() {
-		return dueDate;
-	}
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-		this.overdue = setOverdue(dueDate);
-	}
-	public Priority getPriority() {
-		return priority;
-	}
-	public void setPriority(Priority priority) {
-		this.priority = priority;
-	}
-	public boolean isCompleted() {
-		return completed;
-	}
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-	public boolean isOverdue() {
-		return overdue;
-	}
-	
 	private boolean setOverdue(Date duedate){
-		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sf = new SimpleDateFormat(DATE_PATTERN);
 		Date today = new Date();
 		return !(today.before(duedate) || sf.format(today).equals(sf.format(duedate)));
 	}

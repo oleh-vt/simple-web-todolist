@@ -24,9 +24,9 @@ public class RootContextConfiguration {
 	public DataSource getDataSource(){
 		SimpleDriverDataSource ds = new SimpleDriverDataSource();
 		ds.setDriverClass(com.mysql.jdbc.Driver.class);
-		ds.setUrl("jdbc:mysql://localhost:3306/angular_db");
-        ds.setUsername("angular_user");
-        ds.setPassword("angular");	
+		ds.setUrl("jdbc:mysql://localhost:3306/todo_list_db");
+        ds.setUsername("todo_list_user");
+        ds.setPassword("12345");	
 		return ds;
 	}
 	
