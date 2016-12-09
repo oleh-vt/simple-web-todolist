@@ -24,7 +24,7 @@ import app.todolist.repository.ITaskRepository;
 import app.todolist.service.TaskService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TaskServiceTests {
+public class TaskServiceTest {
 
 	@Mock
 	ITaskRepository repository;
