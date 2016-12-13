@@ -18,11 +18,7 @@
 
         var populateTasksToDisplay = function (accomplished) {
             $scope.tasks = [];
-            for(var i = 0; i < allTasks.length; i++){
-                if(allTasks[i].completed == JSON.parse(accomplished)){
-                    $scope.tasks.push(allTasks[i]);
-                }
-            }
+            $scope.tasks = allTasks.filter(elem => elem.completed == JSON.parse(accomplished));
         };
 
         var onError = function (data) {
@@ -33,8 +29,10 @@
             var id = obj.target.parentNode.parentNode.id;
             simpleTodoListService.deleteTask(id).then(function (data) {
                 for(var i = 0; i < allTasks.length; i++){
-                    if(allTasks[i].id == id)
+                    if(allTasks[i].id == id){
                         allTasks.splice(i, 1);
+                        break;
+                    }
                 }
                 populateTasksToDisplay($scope.isAccomplished);
 
@@ -44,9 +42,11 @@
         $scope.markDone = function (obj) {
             var id = obj.target.parentNode.parentNode.id;
             simpleTodoListService.markTaskDone(id).then(function (data) {
-                for(var i = 0; i < allTasks.length; i++){
-                    if(allTasks[i].id == id)
+            	for(var i = 0; i < allTasks.length; i++){
+                    if(allTasks[i].id == id){
                         allTasks[i].completed=true;
+                        break;
+                    }
                 }
                 populateTasksToDisplay($scope.isAccomplished);
             }, onError);
